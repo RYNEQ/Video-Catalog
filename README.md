@@ -23,7 +23,7 @@
 First Setup your public key in your profile if you didn't before
 Then:
 ```bash
-git clone git@github.com:AnisaAdvancedDjangoClass/video-catalog.git
+git clone git@github.com:**YourUserName**/video-catalog.git
 ```
 ## <a name='Setup-Docker'></a>Setup Docker
 ```bash

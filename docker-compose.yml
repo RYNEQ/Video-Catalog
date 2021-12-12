@@ -1,0 +1,33 @@
+version: '3.1'
+
+services:
+
+    db:
+      image: postgres
+      environment:
+        POSTGRES_USER: django
+        POSTGRES_PASSWORD: passwd
+      ports:
+        - 127.0.0.1:5432:5432
+          
+    adminer:
+      image: adminer
+      ports:
+        - 127.0.0.1:8080:8080
+      
+    # Redis
+    redis:
+        image: redis:3.2.8
+        hostname: redis
+
+    # RabbitMQ
+    rabbit:
+        hostname: rabbit
+        image: rabbitmq:3.6.9
+        environment:
+            - RABBITMQ_DEFAULT_USER=admin
+            - RABBITMQ_DEFAULT_PASS=mypass
+        ports:
+                - 127.0.0.1:5672:5672
+                - 127.0.0.1:15672:15672
+

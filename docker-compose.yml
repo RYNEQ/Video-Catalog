@@ -19,6 +19,8 @@ services:
     redis:
         image: redis:3.2.8
         hostname: redis
+        ports:
+          - 127.0.0.1:6379:6379
 
     # RabbitMQ
     rabbit:

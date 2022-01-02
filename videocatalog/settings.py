@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'core',
 ]
 
 MIDDLEWARE = [
@@ -83,7 +84,13 @@ DATABASES = {
         'PASSWORD': 'passwd',
         'HOST': 'localhost',
         'PORT': '',
-    }
+        'TEST':{
+            'name': 'test_django'
+        }
+    },
+    # 'test': {
+    #     'ENGINE': 'django.db.backends.sqlite3'
+    # }
 }
 
 

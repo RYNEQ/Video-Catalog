@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_q',
     'core',
 ]
 
@@ -158,3 +159,23 @@ FILE_UPLOAD_HANDLERS = [
     'django.core.files.uploadhandler.TemporaryFileUploadHandler'
     # 'django.core.files.uploadhandler.MemoryFileUploadHandler'
 ]
+
+Q_CLUSTER = {
+    'name': 'video-catalog',
+    'workers': 4,
+    'recycle': 500,
+    'timeout': 60,
+    'save_limit': 250,
+    'queue_limit': 500,
+    'cpu_affinity': 1,
+    'label': 'Django Q',
+    'redis': {
+        'host': '127.0.0.1',
+        'port': 6379,
+        'db': 0
+    }
+}
+
+
+
+

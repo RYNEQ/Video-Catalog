@@ -7,4 +7,4 @@ class VideoUploadForm(forms.ModelForm):
     class Meta:
         model = Video
         fields = '__all__'
-        exclude = ['uuid', 'slug', 'cover', 'duration']
+        exclude = ['uuid', 'slug', 'cover', 'duration', 'status']

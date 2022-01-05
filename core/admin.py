@@ -14,7 +14,8 @@ class TagAdmin(admin.ModelAdmin, SharedFeatures):
     ...
 
 class VideoAdmin(admin.ModelAdmin, SharedFeatures):
-    ...
+    list_display = ['uuid', 'title', 'status']
+
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Video, VideoAdmin)

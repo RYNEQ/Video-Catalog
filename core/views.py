@@ -5,7 +5,6 @@ from django.views.generic import FormView # Creation ModelForm
 from .forms import *
 from .models import *
 
-
 class HomePageView(ListView):
     template_name = 'core/video_list.html'
     queryset = Video.objects.all()

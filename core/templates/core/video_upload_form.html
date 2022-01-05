@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block page_body_container %}
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>
+    {{ form }}
+    </table>
+    <br/>
+    <input type="submit" value="{%  trans 'Upload' %}"/>
+    </form>
+{% endblock %}

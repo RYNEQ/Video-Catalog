@@ -129,18 +129,26 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-
+# STATIC_ROOT = 'statficfiles'    # Production
+STATICFILES_DIRS = [BASE_DIR / 'static',]
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CACHES = {
+    # 'default': {
+    #     'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+    #     'LOCATION': 'redis://127.0.0.1:6379'
+    # },
     'default': {
-        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379'
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
     }
 }
 
 
 CAHCE_MIDDLEWARE_SECONDS = 0
+
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = 'media_files'

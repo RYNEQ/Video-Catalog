@@ -152,3 +152,9 @@ CAHCE_MIDDLEWARE_SECONDS = 0
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = 'media_files'
+
+# How to manage files
+FILE_UPLOAD_HANDLERS = [
+    'django.core.files.uploadhandler.TemporaryFileUploadHandler'
+    # 'django.core.files.uploadhandler.MemoryFileUploadHandler'
+]

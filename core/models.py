@@ -30,6 +30,14 @@ def _get_video_upload_path(instance, file):
         print("Path -> ", path)
         return path
 
+def _get_video_thumb_upload_path(instance, file):
+        filename, ext = os.path.splitext(file)
+        uuid_name = uuid.uuid5(uuid.NAMESPACE_URL, filename)
+        base_path = datetime.datetime.now().strftime("videos/%Y/%m/%d/thumbs")
+        path = os.path.join(base_path, f"{uuid_name}{ext}")
+        print("Path -> ", path)
+        return path
+
 
 class Video(BaseCoreModel):
     VIDEO_TYPE_PUBLIC = 1
@@ -46,7 +54,7 @@ class Video(BaseCoreModel):
 
     slug = models.SlugField(allow_unicode=True, unique=True, default=None)
     duration = models.IntegerField()
-    # thumbnail = ...
+    thumbnail = models.FileField(upload_to=_get_video_thumb_upload_path, blank=True)
 
     def __str__(self):
         return self.title

@@ -178,4 +178,4 @@ Q_CLUSTER = {
 
 
 
-
+CELERY_BROKER = 'amqp://admin@mypass:127.0.0.1:5672/0'

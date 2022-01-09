@@ -12,12 +12,18 @@ import ffmpeg
 import os
 from django.conf import settings
 from pymediainfo import MediaInfo
-from django_q.tasks import async_task
+from django_q.tasks import async_task, result
+from . import tasks
+
+class VideoManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(status=Video.VIDEO_STATUS_PUBLISHED, enabled=True).order_by('create_date')
 
 
 class BaseCoreModel(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4, verbose_name=_("UUID"))
     create_date = models.DateTimeField(auto_now_add=True)
+    enabled = models.BooleanField(default=True)
 
     class Meta:
         abstract = True
@@ -94,6 +100,9 @@ class Video(BaseCoreModel):
     cover = models.FileField(upload_to=_get_video_cover_upload_path, blank=True)
     status = models.IntegerField(choices=VIDEO_STATUS_CHOICES, default=VIDEO_STATUS_PROCESSING)
 
+    objects = VideoManager()
+    all_objects = models.Manager()
+
     def __str__(self):
         return self.title
 
@@ -102,8 +111,12 @@ class Video(BaseCoreModel):
             self.slug = slugify(self.title)
 
         res = super().save(*args, **kwargs)
+        if self.status == Video.VIDEO_STATUS_PROCESSING:
+            # id = async_task(process_uploaded_video, self, hook='video_update_finished')
+            # id = async_task(process_uploaded_video, self)
+            # output = result(id, 50)
 
-        async_task(process_uploaded_video, self)
+            tasks.process_uploaded_video.delay(self)
 
         return res
 

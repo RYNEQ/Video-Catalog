@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_q',
+    'account',
+    'widget_tweaks',
     'core',
 ]
 
@@ -176,6 +178,7 @@ Q_CLUSTER = {
     }
 }
 
-
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 CELERY_BROKER = 'amqp://admin@mypass:127.0.0.1:5672/0'

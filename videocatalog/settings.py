@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'account',
     'widget_tweaks',
     'core',
+    'django_celery_results'
 ]
 
 MIDDLEWARE = [
@@ -181,4 +182,7 @@ Q_CLUSTER = {
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
-CELERY_BROKER = 'amqp://admin@mypass:127.0.0.1:5672/0'
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_CACHE_BACKEND = 'django-cache'
+
+CELERY_BROKER_URL = 'amqp://admin:mypass@localhost:5672/'

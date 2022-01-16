@@ -185,4 +185,5 @@ LOGOUT_REDIRECT_URL = '/'
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_CACHE_BACKEND = 'django-cache'
 
+# CELERY_BROKER_URL = 'amqp://admin:mypass@localhost:5672/'
 CELERY_BROKER_URL = 'amqp://admin:mypass@localhost:5672/'

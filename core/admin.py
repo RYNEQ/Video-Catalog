@@ -15,7 +15,10 @@ class TagAdmin(admin.ModelAdmin, SharedFeatures):
 
 class VideoAdmin(admin.ModelAdmin, SharedFeatures):
     list_display = ['uuid', 'title', 'status']
+    readonly_fields = ['uuid', 'user']
 
+    # def get_queryset(self, request):
+    #     return Video.all_objects.all()
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Video, VideoAdmin)

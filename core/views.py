@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.views import View      # Custom
 from django.views.generic import ListView
 from django.views.generic import FormView # Creation ModelForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import *
 from .models import *
 
@@ -16,9 +17,7 @@ class HomePageView(ListView):
     #     ...
 
 
-
-
-class VideUploadView(FormView):
+class VideUploadView(LoginRequiredMixin, FormView):
     """
     Process Upload of video from user side
     """
@@ -27,5 +26,7 @@ class VideUploadView(FormView):
     success_url = '/'
 
     def form_valid(self, form):
-        form.save()
+        obj = form.save(commit=False)
+        obj.user = self.request.user
+        obj.save()
         return super().form_valid(form)  # Run clean & clean_ methods

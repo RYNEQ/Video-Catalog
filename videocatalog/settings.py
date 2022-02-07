@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'account',
     'widget_tweaks',
     'core',
-    'django_celery_results'
+    'django_celery_results',
+    'rest_framework',
+    'rest_framework.authtoken',  # For TokenAuth Only
 ]
 
 MIDDLEWARE = [
@@ -187,3 +189,30 @@ CELERY_CACHE_BACKEND = 'django-cache'
 
 # CELERY_BROKER_URL = 'amqp://admin:mypass@localhost:5672/'
 CELERY_BROKER_URL = 'amqp://admin:mypass@localhost:5672/'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        # 'rest_framework.permissions.AllowAny',
+        # 'rest_framework.permissions.IsAuthenticated',
+        # 'rest_framework.permissions.IsAdminUser',
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+        # 'rest_framework.permissions.DjangoModelPermission',
+        # 'rest_framework.permissions.DjangoModelPermissionOrAnonReadOnly',
+        # 'rest_framework.permissions.DjangoObjectPermission'
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',    # No DB
+        'rest_framework.authentication.SessionAuthentication',  # Ajax
+        'rest_framework.authentication.TokenAuthentication',    # Micro Service
+        'rest_framework.authentication.RemoteUserAuthentication',
+        # SAML -> SSO (Single Sign On)
+        # JWT  -> JSON Web Token (Container) -> Mobile App (Simple-JWT)
+        # OAuth-> JWT+OpenID
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',  # page #
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination', # offset 100, limit 20
+    'PAGE_SIZE': 9,
+    # 'DEFAULT_RENDERER_CLASSES': [
+    #     'rest_framework.renderers.JSONRenderer'
+    # ]
+}

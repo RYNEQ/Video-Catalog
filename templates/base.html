@@ -2,6 +2,7 @@
 <!doctype html>
 <html lang="en">
   <head>
+    {% block all_headers %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -17,6 +18,7 @@
     <!-- Custom styles for this template -->
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
     {% block html_head_end %}{% endblock %}
+    {% endblock %}
   </head>
 
   <body>

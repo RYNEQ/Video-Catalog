@@ -3,6 +3,29 @@
 {% load duration_formatter %}
 {% load cache %}
 
+{% block page_body_container %}
+    {{ block.super }}
+    <div style="text-align: center;">
+        <div class="pagination">
+            <span class="steplinks">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">First</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">Prev</a>
+                {% endif %}
+                <span class="current">
+                    {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+                </span>
+
+                {% if object_list.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">Next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+                {% endif %}
+            </span>
+
+        </div>
+    </div>
+{% endblock %}
+
 {% block page_body_row_section %}
     {% for item in object_list %}
             <div class="col-md-4">
@@ -12,7 +35,7 @@
                   <p class="card-text">{{ item.title }}</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                      <a href="{% url 'core:video_play' uuid=item.uuid %}" target="_blank" class="btn btn-sm btn-outline-secondary">View</a>
                       <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                     </div>
                     <small class="text-muted">{% cache 3600 video_duration item.pk %}{{ item.duration|duration_formatter }}{% endcache %}</small>
@@ -21,4 +44,6 @@
               </div>
             </div>
     {% endfor %}
+
+
 {% endblock %}

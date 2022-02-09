@@ -9,11 +9,13 @@ services:
         POSTGRES_PASSWORD: passwd
       ports:
         - 127.0.0.1:5432:5432
+      volumes:
+          - db-data:/var/lib/postgresql/data
 
-    adminer:
-      image: adminer
-      ports:
-        - 127.0.0.1:8080:8080
+#    adminer:
+#      image: adminer
+#      ports:
+#        - 127.0.0.1:8080:8080
       
     # Redis
     redis:
@@ -43,3 +45,7 @@ services:
 #          - DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
 #        depends_on:
 #          - rabbit
+
+
+volumes:
+    db-data:

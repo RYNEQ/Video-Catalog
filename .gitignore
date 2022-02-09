@@ -153,4 +153,6 @@ cython_debug/
 
 media_files/
 media_files/*
+.idea
+.idea/*
 
